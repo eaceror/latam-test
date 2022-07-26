@@ -1,0 +1,343 @@
+
+                        <html>
+                        <head><title>HTML Pandas Dataframe with CSS</title>
+                            <style>
+                                body{
+                                    font-family: Arial;
+                                    /* display: flex; */
+                                    align-items: center;
+                                    justify-content: center;
+                                    flex-direction: column;
+                                    background-color: #b1b0b0;
+                                }
+                                .mystyle {
+                                    font-size: 11pt; 
+                                    font-family: Arial;
+                                    border-collapse: collapse; 
+                                    border: 1px solid rgb(230, 221, 221);
+                                }
+                                .mystyle td, th {
+                                    padding: 4px;
+                                    text-align: center;
+                                }
+                                .mystyle tr:nth-child(even) {
+                                    background:  #dfdcdcd2;
+                                }
+                                .mystyle tr:hover {
+                                    background: rgb(110, 84, 145);
+                                    cursor: pointer;
+                                    color: white;
+                                }
+                                .mystyle th {
+                                    background-color: #380d5f;
+                                    color: white;
+                                }
+                                .container {
+                                    padding: 5px 20px;
+                                    /* border: 10px solid red; */
+                                    /* justify-content: center; */
+                                    box-sizing: border-box;
+                                    align-content: center;
+                                    display: flex;
+                                    flex-direction: column;
+                                    background-color: rgb(255, 255, 255)
+                                    /* padding-top: 70px; */
+                                    /* background: inherit; */
+                                    /* position: absolute; */
+                                    
+                                }
+                                .sep {
+                                    /* border: 1px solid red; */
+                                    background-color: #010350;
+                                    padding: 5px;
+                                    text-align: center;
+                                    color: white;
+                                    margin: 0%;
+                                    padding: 5px;
+                                    border-radius: 3px;
+                                    font-size: 18pt;
+                                    /* background-image: url("../images/logo_c.png"); */
+                                    /* opacity: 0.1; */
+                                    /* background-repeat: no-repeat; */
+                                }
+                                .sep1 {
+                                    /* border: 1px solid red; */
+                                    background-color:  #380d5f;
+                                    padding: 5px;
+                                    text-align: center;
+                                    color: rgb(255, 255, 255);
+                                    margin: 0%;
+                                    padding: 5px;
+                                    border: #ffffff solid 1px;
+                                    border-radius: 5px;
+                                    font-size: 14pt;
+                                    /* background-image: url("../images/logo_c.png"); */
+                                    /* opacity: 0.1; */
+                                    /* background-repeat: no-repeat; */
+                                }
+                                img {
+                                    max-width: 100%;
+                                    height: auto;
+                                    width: auto\9; /* ie8 */
+                                    /* border: #E0E0E0 solid 1px; */
+                                    border-radius: 6px;
+                                    /* padding: 1%; */
+                                }
+                                h2, h3 {
+                                    margin: 5px;
+                                }
+                            </style>
+                        </head>
+                        <link rel="stylesheet" type="text/css" href="df_style.css"/>
+                        <body>
+                            
+                            <div class="container">
+                                <h1 class="sep">Model Report</h1>
+                                <br>
+                                <h2>Validation Table</h1>
+                                <h3>Resume</h3>
+                                    <table border="1" class="dataframe mystyle">
+  <thead>
+    <tr style="text-align: center;">
+      <th>Population</th>
+      <th>Events</th>
+      <th>Event_Rate</th>
+      <th>KS</th>
+      <th>AUC</th>
+      <th>AR</th>
+      <th>Gini</th>
+      <th>Odds_sup</th>
+      <th>Odds_inf</th>
+      <th>Breaks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>42,969</td>
+      <td>7,993</td>
+      <td>18.60%</td>
+      <td>37.3</td>
+      <td>75.6</td>
+      <td>51.3</td>
+      <td>41.7</td>
+      <td>28.6</td>
+      <td>0.8</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+                                    <br>
+                                    <table border="1" class="dataframe mystyle">
+  <thead>
+    <tr style="text-align: center;">
+      <th>Decil</th>
+      <th>Min_prob</th>
+      <th>Max_prob</th>
+      <th>Total</th>
+      <th>Event</th>
+      <th>NoEvent</th>
+      <th>Event_Rate</th>
+      <th>NoEvent_Rate</th>
+      <th>RateAcum_EventUP</th>
+      <th>RateAcum_EventDOWN</th>
+      <th>KS</th>
+      <th>RateUP</th>
+      <th>RateDOWN</th>
+      <th>Odds</th>
+      <th>Odds_Acum</th>
+      <th>Lift</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>0.02</td>
+      <td>0.07</td>
+      <td>4,297</td>
+      <td>145</td>
+      <td>4,152</td>
+      <td>3.37%</td>
+      <td>96.63%</td>
+      <td>1.81%</td>
+      <td>100.00%</td>
+      <td>10.06</td>
+      <td>3.37%</td>
+      <td>18.60%</td>
+      <td>28.6</td>
+      <td>28.6</td>
+      <td>0.15</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.07</td>
+      <td>0.09</td>
+      <td>4,297</td>
+      <td>256</td>
+      <td>4,041</td>
+      <td>5.96%</td>
+      <td>94.04%</td>
+      <td>5.02%</td>
+      <td>98.19%</td>
+      <td>18.41</td>
+      <td>4.67%</td>
+      <td>20.29%</td>
+      <td>15.8</td>
+      <td>20.4</td>
+      <td>0.26</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.09</td>
+      <td>0.11</td>
+      <td>4,297</td>
+      <td>324</td>
+      <td>3,973</td>
+      <td>7.54%</td>
+      <td>92.46%</td>
+      <td>9.07%</td>
+      <td>94.98%</td>
+      <td>25.71</td>
+      <td>5.62%</td>
+      <td>22.09%</td>
+      <td>12.3</td>
+      <td>16.8</td>
+      <td>0.33</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.11</td>
+      <td>0.13</td>
+      <td>4,297</td>
+      <td>423</td>
+      <td>3,874</td>
+      <td>9.84%</td>
+      <td>90.16%</td>
+      <td>14.36%</td>
+      <td>90.93%</td>
+      <td>31.50</td>
+      <td>6.68%</td>
+      <td>24.16%</td>
+      <td>9.2</td>
+      <td>14.0</td>
+      <td>0.43</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>0.13</td>
+      <td>0.16</td>
+      <td>4,297</td>
+      <td>533</td>
+      <td>3,764</td>
+      <td>12.40%</td>
+      <td>87.60%</td>
+      <td>21.03%</td>
+      <td>85.64%</td>
+      <td>35.59</td>
+      <td>7.82%</td>
+      <td>26.55%</td>
+      <td>7.1</td>
+      <td>11.8</td>
+      <td>0.54</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>0.16</td>
+      <td>0.19</td>
+      <td>4,296</td>
+      <td>691</td>
+      <td>3,605</td>
+      <td>16.08%</td>
+      <td>83.92%</td>
+      <td>29.68%</td>
+      <td>78.97%</td>
+      <td>37.25</td>
+      <td>9.20%</td>
+      <td>29.38%</td>
+      <td>5.2</td>
+      <td>9.9</td>
+      <td>0.70</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>0.19</td>
+      <td>0.22</td>
+      <td>4,297</td>
+      <td>844</td>
+      <td>3,453</td>
+      <td>19.64%</td>
+      <td>80.36%</td>
+      <td>40.24%</td>
+      <td>70.32%</td>
+      <td>36.57</td>
+      <td>10.69%</td>
+      <td>32.70%</td>
+      <td>4.1</td>
+      <td>8.4</td>
+      <td>0.86</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0.22</td>
+      <td>0.26</td>
+      <td>4,297</td>
+      <td>1,015</td>
+      <td>3,282</td>
+      <td>23.62%</td>
+      <td>76.38%</td>
+      <td>52.93%</td>
+      <td>59.76%</td>
+      <td>33.25</td>
+      <td>12.31%</td>
+      <td>37.06%</td>
+      <td>3.2</td>
+      <td>7.1</td>
+      <td>1.03</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>0.26</td>
+      <td>0.33</td>
+      <td>4,297</td>
+      <td>1,412</td>
+      <td>2,885</td>
+      <td>32.86%</td>
+      <td>67.14%</td>
+      <td>70.60%</td>
+      <td>47.07%</td>
+      <td>23.83</td>
+      <td>14.59%</td>
+      <td>43.77%</td>
+      <td>2.0</td>
+      <td>5.9</td>
+      <td>1.44</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>0.33</td>
+      <td>0.85</td>
+      <td>4,297</td>
+      <td>2,350</td>
+      <td>1,947</td>
+      <td>54.69%</td>
+      <td>45.31%</td>
+      <td>100.00%</td>
+      <td>29.40%</td>
+      <td>0.00</td>
+      <td>18.60%</td>
+      <td>54.69%</td>
+      <td>0.8</td>
+      <td>4.4</td>
+      <td>2.39</td>
+    </tr>
+  </tbody>
+</table>
+                                <center>
+                                <br>
+                                <br>
+                                <h2 class="sep1">Graphs</h2>
+                                <img src="../../docs/graphvalidation_table_train.png"/>
+                                </center>
+                            </div>
+                        </body>
+                        </html>.
+                        

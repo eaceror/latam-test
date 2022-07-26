@@ -454,3 +454,64 @@ def validation_table(
         return {'resume_sc': resumen_print,
                  'score_card': ks_print}
 
+
+def plot_importances(model, path_output:str = None, top: int = 10, show=True):
+    """Plot and save importances of features in a xgboost model.
+    Parameters
+    ----------
+    model : skmodel, required
+        object model.
+    path_output : str, required
+        path of the output, by default None
+    top : int, optional
+        number of features to show, by default 10
+    show : bool, optional
+        Flag to show or not the plots, by default True
+    Returns
+    -------
+    PNG file
+        It plots and saves the different importances of each feature in a xgboost model.
+    """    
+    def order_dict(dic: dict):
+        dic = {k: v for k, v in sorted(dic.items(), key=lambda item: item[1], reverse=False)}
+        return dic    
+    gain = order_dict(model.get_booster().get_score(importance_type='gain'))
+    gain_top = {k: gain[k] for k in list(gain)[-top:]}    
+    tgain = order_dict(model.get_booster().get_score(importance_type='total_gain'))
+    tgain_top = {k: tgain[k] for k in list(tgain)[-top:]}
+    cover = order_dict(model.get_booster().get_score(importance_type='cover'))
+    cover_top = {k: cover[k] for k in list(cover)[-top:]}
+    tcover = order_dict(model.get_booster().get_score(importance_type='total_cover'))
+    tcover_top = {k: tcover[k] for k in list(tcover)[-top:]}
+    weight = order_dict(model.get_booster().get_score(importance_type='weight'))
+    weight_top = {k: weight[k] for k in list(weight)[-top:]}
+    dfgain = pd.DataFrame.from_dict(gain, orient='index', columns=['Gain'])
+    dftgain = pd.DataFrame.from_dict(tgain, orient='index', columns=['Total_gain'])
+    dfcover = pd.DataFrame.from_dict(cover, orient='index', columns=['Cover'])
+    dftcover = pd.DataFrame.from_dict(tcover, orient='index', columns=['Total_cover'])
+    dfweight = pd.DataFrame.from_dict(weight, orient='index', columns=['Weight'])
+    df = pd.concat([dfgain, dftgain, dfcover, dftcover, dfweight], axis=1)
+    plt.style.use("seaborn")
+    fig, axs = plt.subplots(2, 3, figsize=(18, 9))
+    axs[0, 0].barh(*zip(*gain_top.items()))
+    axs[0, 1].barh(*zip(*tgain_top.items()))
+    axs[0, 2].barh(*zip(*cover_top.items()))
+    axs[1, 0].barh(*zip(*tcover_top.items()))
+    axs[1, 1].barh(*zip(*weight_top.items()))
+    axs[0, 0].set_title('Gain')
+    axs[0, 1].set_title('Total Gain')
+    axs[0, 2].set_title('Cover')
+    axs[1, 0].set_title('Total Cover')
+    axs[1, 1].set_title('Weight')
+    fig.delaxes(axs[1, 2])
+    plt.subplots_adjust(wspace=0.2)
+    plt.subplots_adjust(hspace=0.2)
+    plt.tight_layout()
+    if show is True:
+        plt.show()
+        return df
+    else:        
+        plt.savefig(path_output+'.png', format="png", bbox_inches='tight')
+        df.to_csv(path_output+'.csv', sep='|')
+        fig.clear()
+        plt.close(fig)
